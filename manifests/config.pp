@@ -8,16 +8,18 @@ class dbus::config {
     mode   => '0644',
   }
 
+  $validate_cmd = $::dbus::validate ? {
+    true    => '/usr/bin/xmllint --noout --valid %',
+    default => undef,
+  }
+
   file { $::dbus::session_conf:
     ensure       => file,
     owner        => 0,
     group        => 0,
     mode         => '0644',
     content      => template("dbus/${::osfamily}/session.conf.erb"),
-    validate_cmd => $::dbus::validate ? { # lint:ignore:selector_inside_resource
-      true    => '/usr/bin/xmllint --noout --valid %',
-      default => undef,
-    },
+    validate_cmd => $validate_cmd,
   }
 
   file { $::dbus::local_session_conf:
@@ -43,10 +45,7 @@ class dbus::config {
     group        => 0,
     mode         => '0644',
     content      => template("dbus/${::osfamily}/system.conf.erb"),
-    validate_cmd => $::dbus::validate ? { # lint:ignore:selector_inside_resource
-      true    => '/usr/bin/xmllint --noout --valid %',
-      default => undef,
-    },
+    validate_cmd => $validate_cmd,
   }
 
   file { $::dbus::system_dir:
