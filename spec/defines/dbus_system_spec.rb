@@ -15,7 +15,14 @@ describe 'dbus::system' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts
+        facts.merge({
+          # FIXME
+          :dbus_startup_provider => facts[:osfamily] == 'RedHat'     \
+            ? ['5', '6'].include?(facts[:operatingsystemmajrelease]) \
+              ? 'init'                                               \
+              : 'systemd'                                            \
+            : 'init',
+        })
       end
 
       context 'without dbus class included' do
