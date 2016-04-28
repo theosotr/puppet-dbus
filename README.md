@@ -82,9 +82,22 @@ Whether to purge any unmanaged session bus per-application configuration files.
 
 Whether to purge any unmanaged system bus per-application configuration files.
 
+##### `service_enable`
+
+Whether to enable the service or not. On platforms that use systemd, the dbus
+unit is marked static so can neither be disabled or enabled by the `service`
+type.
+
 ##### `service_name`
 
 The name of the service managing the `dbus-daemon` daemon.
+
+##### `service_restart`
+
+The command used to get `dbus-daemon` to reload its configuration, which is
+usually `dbus-send --system --type=method_call --dest=org.freedesktop.DBus /
+org.freedesktop.DBus.ReloadConfig`. On platforms that use systemd, this is what
+the unit does anyway and so will rely on that where possible.
 
 ##### `session_conf`
 
@@ -171,6 +184,11 @@ include ::dbus
   session bus per-application configuration.
 * [`dbus::system`](#defined-type-dbussystem): Handles installing
   system bus per-application configuration.
+
+### Facts
+
+* `dbus_startup_provider`: Contains the value of the hosts init system.
+  `systemd` on such systems, `init` otherwise.
 
 ## Limitations
 

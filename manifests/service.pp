@@ -1,10 +1,17 @@
 #
 class dbus::service {
 
+  $restart    = $::dbus::service_restart
+  $hasrestart = $restart ? {
+    undef   => true,
+    default => false,
+  }
+
   service { $::dbus::service_name:
     ensure     => running,
-    enable     => true,
+    enable     => $::dbus::service_enable,
     hasstatus  => true,
-    hasrestart => true,
+    hasrestart => $hasrestart,
+    restart    => $restart,
   }
 }
