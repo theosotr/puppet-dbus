@@ -7,25 +7,23 @@ class dbus::params {
   $package_name       = 'dbus'
   $purge_session_dir  = false
   $purge_system_dir   = false
+  $service_restart    = 'dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig'
   $session_dir        = "${conf_dir}/session.d"
   $system_dir         = "${conf_dir}/system.d"
   $validate           = false # xmllint currently can't fetch a DTD over HTTPS
 
   case $::osfamily {
     'RedHat': {
-      $dbus_send    = '/bin/dbus-send'
       $service_name = 'messagebus'
       $session_conf = "${conf_dir}/session.conf"
       $system_conf  = "${conf_dir}/system.conf"
     }
     'Debian': {
-      $dbus_send    = '/bin/dbus-send'
       $service_name = 'dbus'
       $session_conf = "${conf_dir}/session.conf"
       $system_conf  = "${conf_dir}/system.conf"
     }
     'OpenBSD': {
-      $dbus_send    = '/usr/local/bin/dbus-send'
       $service_name = 'messagebus'
       $session_conf = '/usr/local/share/dbus-1/session.conf'
       $system_conf  = '/usr/local/share/dbus-1/system.conf'
@@ -37,12 +35,10 @@ class dbus::params {
 
   case $::dbus_startup_provider {
     'systemd': {
-      $service_enable  = undef
-      $service_restart = undef
+      $service_enable = undef
     }
     default: {
-      $service_enable  = true
-      $service_restart = "${dbus_send} --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig"
+      $service_enable = true
     }
   }
 }

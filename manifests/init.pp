@@ -36,10 +36,13 @@ class dbus (
   include ::dbus::install
   include ::dbus::config
   include ::dbus::service
+  include ::dbus::reload
 
   anchor { 'dbus::begin': }
   anchor { 'dbus::end': }
 
-  Anchor['dbus::begin'] -> Class['::dbus::install'] -> Class['::dbus::config']
-    ~> Class['::dbus::service'] -> Anchor['dbus::end']
+  Anchor['dbus::begin'] -> Class['::dbus::install'] ~> Class['::dbus::service']
+    -> Class['::dbus::reload'] -> Anchor['dbus::end']
+  Class['::dbus::install'] -> Class['::dbus::config']
+    ~> Class['::dbus::reload']
 }

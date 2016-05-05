@@ -31,7 +31,9 @@ describe 'dbus' do
       it { should contain_class('dbus::config') }
       it { should contain_class('dbus::install') }
       it { should contain_class('dbus::params') }
+      it { should contain_class('dbus::reload') }
       it { should contain_class('dbus::service') }
+      it { should contain_exec('dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig') }
       it { should contain_file('/etc/dbus-1') }
       it { should contain_file('/etc/dbus-1/session.d') }
       it { should contain_file('/etc/dbus-1/session-local.conf') }
@@ -43,40 +45,18 @@ describe 'dbus' do
       when 'RedHat'
         case facts[:operatingsystemmajrelease]
         when '5', '6'
-          it do
-            should contain_service('messagebus').with({
-              'enable'     => true,
-              'restart'    => '/bin/dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig',
-              'hasrestart' => false,
-            })
-          end
+          it { should contain_service('messagebus').with_enable(true) }
         else
-          it do
-            should contain_service('messagebus').without('enable').with({
-              'hasrestart' => true,
-            })
-          end
+          it { should contain_service('messagebus').without('enable') }
         end
         it { should contain_file('/etc/dbus-1/session.conf') }
         it { should contain_file('/etc/dbus-1/system.conf') }
       when 'Debian'
-        it do
-          should contain_service('dbus').with({
-            'enable'     => true,
-            'restart'    => '/bin/dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig',
-            'hasrestart' => false,
-          })
-        end
+        it { should contain_service('dbus').with_enable(true) }
         it { should contain_file('/etc/dbus-1/session.conf') }
         it { should contain_file('/etc/dbus-1/system.conf') }
       when 'OpenBSD'
-        it do
-          should contain_service('messagebus').with({
-            'enable'     => true,
-            'restart'    => '/usr/local/bin/dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig',
-            'hasrestart' => false,
-          })
-        end
+        it { should contain_service('messagebus').with_enable(true) }
         it { should contain_file('/usr/local/share/dbus-1/session.conf') }
         it { should contain_file('/usr/local/share/dbus-1/system.conf') }
       end

@@ -21,6 +21,6 @@ define dbus::session (
     mode         => '0644',
     content      => $content,
     validate_cmd => $validate_cmd,
-    notify       => Class['::dbus::service'],
+    notify       => Class['::dbus::reload'],
   }
 }

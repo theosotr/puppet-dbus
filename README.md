@@ -174,6 +174,7 @@ include ::dbus
 * `dbus::config`: Handles D-Bus configuration.
 * `dbus::install`: Handles D-Bus installation.
 * `dbus::params`: Different configuration data for different systems.
+* `dbus::reload`: Handles reloading D-Bus configuration.
 * `dbus::service`: Handles starting the dbus-daemon daemon.
 
 ### Defined Types
