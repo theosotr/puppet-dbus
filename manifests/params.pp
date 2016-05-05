@@ -14,7 +14,14 @@ class dbus::params {
 
   case $::osfamily {
     'RedHat': {
-      $service_name = 'messagebus'
+      case $::operatingsystemmajrelease {
+        '5', '6': {
+          $service_name = 'messagebus'
+        }
+        default: {
+          $service_name = 'dbus'
+        }
+      }
       $session_conf = "${conf_dir}/session.conf"
       $system_conf  = "${conf_dir}/system.conf"
     }

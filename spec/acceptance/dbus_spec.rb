@@ -7,7 +7,12 @@ describe 'dbus' do
     group        = 'root'
     session_conf = '/etc/dbus-1/session.conf'
     system_conf  = '/etc/dbus-1/system.conf'
-    service      = 'messagebus'
+    case fact('operatingsystemmajrelease')
+    when '5', '6'
+      service = 'messagebus'
+    else
+      service = 'dbus'
+    end
   when 'Debian'
     group        = 'root'
     session_conf = '/etc/dbus-1/session.conf'

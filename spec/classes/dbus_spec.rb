@@ -47,7 +47,7 @@ describe 'dbus' do
         when '5', '6'
           it { should contain_service('messagebus').with_enable(true) }
         else
-          it { should contain_service('messagebus').without('enable') }
+          it { should contain_service('dbus').without('enable') }
         end
         it { should contain_file('/etc/dbus-1/session.conf') }
         it { should contain_file('/etc/dbus-1/system.conf') }
