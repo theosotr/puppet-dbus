@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class dbus::params {
 
   $conf_dir           = '/etc/dbus-1'
@@ -36,7 +36,7 @@ class dbus::params {
       $system_conf  = '/usr/local/share/dbus-1/system.conf'
     }
     default: {
-      fail("The ${module_name} module is not supported on an ${::osfamily} based system.") # lint:ignore:80chars
+      fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
     }
   }
 

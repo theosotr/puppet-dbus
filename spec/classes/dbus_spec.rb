@@ -25,8 +25,6 @@ describe 'dbus' do
         })
       end
 
-      it { should contain_anchor('dbus::begin') }
-      it { should contain_anchor('dbus::end') }
       it { should contain_class('dbus') }
       it { should contain_class('dbus::config') }
       it { should contain_class('dbus::install') }

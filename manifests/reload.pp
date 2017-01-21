@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class dbus::reload {
 
   exec { $::dbus::service_restart:

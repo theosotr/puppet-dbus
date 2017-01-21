@@ -30,7 +30,7 @@ describe 'dbus' do
     pp = <<-EOS
       Package {
         source => $::osfamily ? {
-          'OpenBSD' => "http://ftp.openbsd.org/pub/OpenBSD/${::operatingsystemrelease}/packages/${::architecture}/",
+          'OpenBSD' => "http://ftp.openbsd.org/pub/OpenBSD/${::operatingsystemrelease}/packages/amd64/",
           default   => undef,
         },
       }

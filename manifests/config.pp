@@ -1,4 +1,4 @@
-#
+# @!visibility private
 class dbus::config {
 
   file { $::dbus::conf_dir:
@@ -18,7 +18,7 @@ class dbus::config {
     owner        => 0,
     group        => 0,
     mode         => '0644',
-    content      => template("dbus/${::osfamily}/session.conf.erb"),
+    content      => template("${module_name}/${::osfamily}/session.conf.erb"),
     validate_cmd => $validate_cmd,
   }
 
@@ -44,7 +44,7 @@ class dbus::config {
     owner        => 0,
     group        => 0,
     mode         => '0644',
-    content      => template("dbus/${::osfamily}/system.conf.erb"),
+    content      => template("${module_name}/${::osfamily}/system.conf.erb"),
     validate_cmd => $validate_cmd,
   }
 
