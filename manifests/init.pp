@@ -36,19 +36,19 @@
 # @see puppet_defined_types::dbus::session ::dbus::session
 # @see puppet_defined_types::dbus::system ::dbus::system
 class dbus (
-  Stdlib::AbsolutePath $conf_dir           = $::dbus::params::conf_dir,
-  Stdlib::AbsolutePath $local_session_conf = $::dbus::params::local_session_conf,
-  Stdlib::AbsolutePath $local_system_conf  = $::dbus::params::local_system_conf,
+  Stdlib::Absolutepath $conf_dir           = $::dbus::params::conf_dir,
+  Stdlib::Absolutepath $local_session_conf = $::dbus::params::local_session_conf,
+  Stdlib::Absolutepath $local_system_conf  = $::dbus::params::local_system_conf,
   String               $package_name       = $::dbus::params::package_name,
   Boolean              $purge_session_dir  = $::dbus::params::purge_session_dir,
   Boolean              $purge_system_dir   = $::dbus::params::purge_system_dir,
   Optional[Boolean]    $service_enable     = $::dbus::params::service_enable,
   String               $service_name       = $::dbus::params::service_name,
   String               $service_restart    = $::dbus::params::service_restart,
-  Stdlib::AbsolutePath $session_conf       = $::dbus::params::session_conf,
-  Stdlib::AbsolutePath $session_dir        = $::dbus::params::session_dir,
-  Stdlib::AbsolutePath $system_conf        = $::dbus::params::system_conf,
-  Stdlib::AbsolutePath $system_dir         = $::dbus::params::system_dir,
+  Stdlib::Absolutepath $session_conf       = $::dbus::params::session_conf,
+  Stdlib::Absolutepath $session_dir        = $::dbus::params::session_dir,
+  Stdlib::Absolutepath $system_conf        = $::dbus::params::system_conf,
+  Stdlib::Absolutepath $system_dir         = $::dbus::params::system_dir,
   Boolean              $validate           = $::dbus::params::validate,
 ) inherits ::dbus::params {
 
