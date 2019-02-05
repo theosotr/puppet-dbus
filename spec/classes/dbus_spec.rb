@@ -29,7 +29,6 @@ describe 'dbus' do
       it { should contain_class('dbus::config') }
       it { should contain_class('dbus::install') }
       it { should contain_class('dbus::params') }
-      it { should contain_class('dbus::reload') }
       it { should contain_class('dbus::service') }
       it { should contain_exec('dbus-send --system --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig') }
       it { should contain_file('/etc/dbus-1') }

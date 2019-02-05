@@ -31,6 +31,6 @@ define dbus::system (
     mode         => '0644',
     content      => $content,
     validate_cmd => $validate_cmd,
-    notify       => Class['::dbus::reload'],
+    notify       => Class['::dbus::service'],
   }
 }

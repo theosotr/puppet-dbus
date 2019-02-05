@@ -55,10 +55,7 @@ class dbus (
   contain ::dbus::install
   contain ::dbus::config
   contain ::dbus::service
-  contain ::dbus::reload
 
-  Class['::dbus::install'] -> Class['::dbus::service']
-    -> Class['::dbus::reload']
   Class['::dbus::install'] -> Class['::dbus::config']
-    ~> Class['::dbus::reload']
+    ~> Class['::dbus::service']
 }
